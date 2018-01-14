@@ -1,7 +1,8 @@
+from ib.ext.EClientSocket import EClientSocket
 
-class IBClient:
-    def __init__(self):
-        pass
+class IBClient(EClientSocket):
+    def __init__(self, wrapper):
+        EClientSocket.__init__(self, wrapper)
 
     def run_interface(self):
         pass

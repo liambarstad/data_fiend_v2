@@ -1,27 +1,16 @@
 import unittest
 import datetime
+import swigibpy
 from threading import Thread
 from cerberus.services.interactive_broker.ib_wrapper import IBWrapper
-from cerberus.services.interactive_broker.ib_client import IBClient
+from cerberus.auxiliary.yaml_validator import YamlValidator as yv
 
 class InteractiveBrokerHistoricalDataTests(unittest.TestCase):
     def setUp(self):
-        self.ib_wrapper = IBWrapper()
-        self.ib_client = IBClient()
-        self.client_thread = Thread(target = self.ib_client.run_interface)
+        self.connection = swigibpy.EPosixClientSocket(ewrapper=IBWrapper)
 
-    def test_it_can_retrieve_order_history(self):
-        self.client_thread.start()
-        start_date = datetime.datetime(year=2017,
-                month=2,
-                day=2,
-                hour=16,
-                minute=43)
-        end_date = datetime.datetime(year=2017,
-                month=9,
-                day=2,
-                hour=2,
-                minute=22)
-        response = self.ib_wrapper.get_hist(start=start_date, end=end_date, instrument="AAPL")
+    def test_it_can_retrieve_account_summary(self):
+        self.connection.eConnect(4001)
+        
         assert response.status_code == 200
 
