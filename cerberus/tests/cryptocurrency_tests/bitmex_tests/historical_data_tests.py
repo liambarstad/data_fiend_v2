@@ -15,8 +15,10 @@ class BitmexHistoricalDataTests(unittest.TestCase):
 
         assert response.status_code == 200
 
-    def it_can_retrieve_eth_data(self):
-        pass
+    def test_it_can_retrieve_eth_data(self):
+        response = self.bitmex_wrapper.query(verb='GET', path='position', params={'symbol': 'ETH'})
+
+        assert response.status_code == 200
     
     def tearDown(self):
         pass
