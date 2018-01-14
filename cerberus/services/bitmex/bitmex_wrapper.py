@@ -10,10 +10,10 @@ class BitmexWrapper:
     def __init__(self):
         self.root = "https://www.bitmex.com"
 
-    def get(self, path, params={}, data=""):
+    def query(self, verb, path, params={}, data=""):
         expiry_time = str(int(time.time() + 60))
         destination = "/api/v1/" + path + urllib.parse.urlencode(params, doseq=True)
-        sig = self.__generate_signature("GET", destination, expiry_time, data)
+        sig = self.__generate_signature(verb, destination, expiry_time, data)
         url = self.root + "/api/v1/" + path
         headers = { 'api-expires': expiry_time, 'api-key': yv.find("bitmex_key"), 'api-signature': sig }
         return requests.get(url, headers=headers)
