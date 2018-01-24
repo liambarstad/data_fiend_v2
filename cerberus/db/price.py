@@ -10,10 +10,13 @@ class Price:
        self.cls.create(**self.attrs)
 
     @classmethod
-    def create(cls, **kwargs)
+    def create(cls, **kwargs):
        transaction = graph_db.begin(autocommit=True) 
        transaction.create(Node(f'{cls.__name__}', **kwargs)
 
-    def first(cls)
-       pass 
+    def all(cls):
+        pass
+
+    def first(cls):
+        pass 
 
